@@ -1,0 +1,18 @@
+{
+  "name": "com.artem.myutilities",
+  "version": "1.0.0",
+  "displayName": "My Utilities",
+  "description": "A collection of my own utilities and tools",
+  "unity": "2019.1",
+  "dependencies": {
+    "com.unity.textmeshpro": "2.1.1"
+  },
+  "keywords": [
+    "utility",
+    "tools"
+  ],
+  "author": {
+    "name": "Artem Stolyga",
+    "email": "artem.stolyga@gmail.com"
+  }
+}
