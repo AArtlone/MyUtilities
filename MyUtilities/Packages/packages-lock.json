@@ -1,13 +1,5 @@
 {
   "dependencies": {
-    "com.artem.myutilities": {
-      "version": "file:MyUtilities",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {
-        "com.unity.textmeshpro": "2.1.1"
-      }
-    },
     "com.unity.collab-proxy": {
       "version": "1.2.16",
       "depth": 0,
