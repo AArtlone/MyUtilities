@@ -7,14 +7,10 @@ namespace MyUtilities
 {
     public class IOFileHandler
     {
-        private string dataPath = default;
 
-        public IOFileHandler()
-        {
-            dataPath = Application.dataPath;
-        }
+        private static string dataPath = Application.dataPath;
 
-        public void SaveFile(string jsonData, string fileName, Action<bool> callback)
+        public static void SaveFile(string jsonData, string fileName, Action<bool> callback)
         {
             var savingThread = new Thread(() =>
             {
@@ -24,7 +20,7 @@ namespace MyUtilities
             savingThread.Start();
         }
 
-        public void LoadFile(string fileName, Action<string> callback)
+        public static void LoadFile(string fileName, Action<string> callback)
         {
             var thread = new Thread(() =>
             {
@@ -34,7 +30,7 @@ namespace MyUtilities
             thread.Start();
         }
 
-        public void CheckFileExists(string fileName, Action<bool> callback)
+        public static void CheckFileExists(string fileName, Action<bool> callback)
         {
             string filePath = GetFilePath(fileName);
 
@@ -53,7 +49,7 @@ namespace MyUtilities
             callback(exists);
         }
 
-        private void ReadFile(Action<string> callback, string fileName)
+        private static void ReadFile(Action<string> callback, string fileName)
         {
             string path = GetFilePath(fileName);
 
@@ -72,7 +68,7 @@ namespace MyUtilities
             callback(data);
         }
 
-        private void WriteFile(string fileName, string data, Action<bool> doneCallback)
+        private static void WriteFile(string fileName, string data, Action<bool> doneCallback)
         {
             string path = GetFilePath(fileName);
 
@@ -81,6 +77,7 @@ namespace MyUtilities
 
             try
             {
+                Debug.Log(path);
                 File.WriteAllText(path, data, System.Text.Encoding.UTF8);
             }
             catch (Exception exception)
@@ -96,7 +93,7 @@ namespace MyUtilities
             doneCallback(true);
         }
 
-        private string GetFilePath(string fileName)
+        private static string GetFilePath(string fileName)
         {
             if (Application.isEditor)
             {

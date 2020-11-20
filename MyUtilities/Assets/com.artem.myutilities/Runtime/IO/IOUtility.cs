@@ -5,14 +5,8 @@ namespace MyUtilities
 {
     public class IOUtility : MonoBehaviour
     {
-        private IOFileHandler fileHandler;
 
-        private void Start()
-        {
-            fileHandler = new IOFileHandler();
-        }
-
-        public void SaveData(PlayerData data, Action<bool> callback)
+        public static void SaveData(object data, Action<bool> callback)
         {
             if (data == null)
             {
@@ -33,12 +27,12 @@ namespace MyUtilities
                 return;
             }
 
-            fileHandler.SaveFile(jsonData, "PlayerData", callback);
+            IOFileHandler.SaveFile(jsonData, "PlayerData", callback);
         }
 
-        public void LoadData(Action<PlayerData> callback)
+        public static void LoadData(Action<object> callback)
         {
-            fileHandler.CheckFileExists("PlayerData", (bool exists) =>
+            IOFileHandler.CheckFileExists("PlayerData", (bool exists) =>
             {
                 if (!exists)
                 {
@@ -46,9 +40,9 @@ namespace MyUtilities
                     return;
                 }
 
-                fileHandler.LoadFile("PlayerData", (string data) =>
+                IOFileHandler.LoadFile("PlayerData", (string data) =>
                 {
-                    PlayerData playerData;
+                    object playerData;
 
                     if (!TryToParseFromJson(data, out playerData))
                     {
@@ -61,7 +55,7 @@ namespace MyUtilities
             });
         }
 
-        private bool TryToParseToJson(PlayerData data, out string json)
+        private static bool TryToParseToJson(object data, out string json)
         {
             try
             {
@@ -80,7 +74,7 @@ namespace MyUtilities
             }
         }
 
-        private bool TryToParseFromJson(string json, out PlayerData playerData)
+        private static bool TryToParseFromJson(string json, out object playerData)
         {
             if (string.IsNullOrEmpty(json))
             {
@@ -90,7 +84,7 @@ namespace MyUtilities
 
             try
             {
-                playerData = JsonUtility.FromJson<PlayerData>(json);
+                playerData = JsonUtility.FromJson<object>(json);
                 return true;
             }
             catch (Exception exception)
