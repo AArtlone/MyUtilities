@@ -3,10 +3,9 @@ using UnityEngine;
 
 namespace MyUtilities
 {
-    public class IOUtility : MonoBehaviour
+    public class IOUtility<T>
     {
-
-        public static void SaveData(object data, Action<bool> callback)
+        public static void SaveData(T data, string fileName, Action<bool> callback)
         {
             if (data == null)
             {
@@ -27,26 +26,27 @@ namespace MyUtilities
                 return;
             }
 
-            IOFileHandler.SaveFile(jsonData, "PlayerData", callback);
+            IOFileHandler.SaveFile(jsonData, fileName, callback);
         }
 
-        public static void LoadData(Action<object> callback)
+        public static void LoadData(string fileName, Action<T> callback)
         {
-            IOFileHandler.CheckFileExists("PlayerData", (bool exists) =>
+            IOFileHandler.CheckFileExists(fileName, (bool exists) =>
             {
                 if (!exists)
                 {
-                    callback(null);
+                    Debug.LogWarning("File does not exist");
+                    callback(default(T));
                     return;
                 }
 
-                IOFileHandler.LoadFile("PlayerData", (string data) =>
+                IOFileHandler.LoadFile(fileName, (string data) =>
                 {
-                    object playerData;
+                    T playerData;
 
                     if (!TryToParseFromJson(data, out playerData))
                     {
-                        callback(null);
+                        callback(default(T));
                         return;
                     }
 
@@ -55,7 +55,7 @@ namespace MyUtilities
             });
         }
 
-        private static bool TryToParseToJson(object data, out string json)
+        private static bool TryToParseToJson(T data, out string json)
         {
             try
             {
@@ -74,25 +74,27 @@ namespace MyUtilities
             }
         }
 
-        private static bool TryToParseFromJson(string json, out object playerData)
+        private static bool TryToParseFromJson(string json, out T playerData)
         {
             if (string.IsNullOrEmpty(json))
             {
-                playerData = null;
+                playerData = default(T);
                 return false;
             }
 
             try
             {
-                playerData = JsonUtility.FromJson<object>(json);
+                playerData = JsonUtility.FromJson<T>(json);
                 return true;
             }
             catch (Exception exception)
             {
+                Debug.LogWarning("Parsing from JSON failed");
+
                 if (Application.isEditor)
                     throw exception;
 
-                playerData = null;
+                playerData = default(T);
                 return false;
             }
         }
