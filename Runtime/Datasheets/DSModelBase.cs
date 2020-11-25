@@ -33,6 +33,15 @@ namespace MyUtilities.DataSheets
             return allRecords;
         }
 
+        protected virtual List<T2> GetAllIDs()
+        {
+            List<T2> allIDs = new List<T2>(allRecords.Count);
+
+            allRecords.ForEach(r => allIDs.Add(r.recordID));
+
+            return allIDs;
+        }
+
         public T1 GetRecordByID(T2 id)
         {
             foreach (var v in allRecords)
