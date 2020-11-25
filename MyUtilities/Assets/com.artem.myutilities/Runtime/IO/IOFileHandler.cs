@@ -7,7 +7,6 @@ namespace MyUtilities
 {
     public class IOFileHandler
     {
-
         private static string dataPath = Application.dataPath;
 
         public static void SaveFile(string jsonData, string fileName, Action<bool> callback)
@@ -38,6 +37,8 @@ namespace MyUtilities
 
             try
             {
+                Debug.Log(filePath);
+                //filePath += ".json";
                 exists = File.Exists(filePath);
             }
             catch (Exception exception)
@@ -57,6 +58,7 @@ namespace MyUtilities
 
             try
             {
+                //path += ".json";
                 data = File.ReadAllText(path);
             }
             catch (Exception exception)
@@ -73,7 +75,7 @@ namespace MyUtilities
             string path = GetFilePath(fileName);
 
             // Converting to JSON
-            path += ".json";
+            //path += ".json";
 
             try
             {
@@ -103,6 +105,8 @@ namespace MyUtilities
 
                 if (!Directory.Exists(editorPath))
                     Directory.CreateDirectory(editorPath);
+
+                fileName += ".json";
 
                 return Path.Combine(editorPath, fileName);
             }
