@@ -64,6 +64,7 @@ namespace MyUtilities.DataSheets
 
             using (StreamWriter outFile = new StreamWriter(modelFilePath))
             {
+                outFile.WriteLine("using MyUtilities.DataSheets;");
                 outFile.WriteLine("using UnityEngine;");
 
                 outFile.WriteLine("");
@@ -97,8 +98,11 @@ namespace MyUtilities.DataSheets
 
             using (StreamWriter outFile = new StreamWriter(recordFilePath))
             {
+                outFile.WriteLine("using MyUtilities.DataSheets;");
                 outFile.WriteLine("using System;");
+
                 outFile.WriteLine("");
+                
                 outFile.WriteLine("[Serializable]");
                 outFile.WriteLine($"public class {modelName}DSRecord: DSRecordBase<{modelName}DSID>");
                 outFile.WriteLine("{");
