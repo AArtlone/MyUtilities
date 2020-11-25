@@ -47,7 +47,7 @@ namespace MyUtilities.GUI
         {
             if (!HasInTransition())
             {
-                print("View controller does not have any IN transitions");
+                //print("View controller does not have any IN transitions");
                 callback.Invoke();
                 yield break;
             }
@@ -56,7 +56,7 @@ namespace MyUtilities.GUI
 
             float duration = GetInTransitionDuration();
 
-            print($"In transitions durations is {duration}");
+            //print($"In transitions durations is {duration}");
 
             yield return new WaitForSeconds(duration);
 
@@ -67,7 +67,7 @@ namespace MyUtilities.GUI
         {
             if (!HasOutTransition())
             {
-                print("View controller does not have any OUT transitions");
+                //print("View controller does not have any OUT transitions");
                 callback.Invoke();
                 yield break;
             }
