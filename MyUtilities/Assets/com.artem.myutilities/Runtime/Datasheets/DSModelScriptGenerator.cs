@@ -10,6 +10,7 @@ namespace MyUtilities.DataSheets
         private const string DatasheetsPath = "Assets/Resources/Datasheets/";
 
         private const string DatasheetsModelsPath = "Assets/Scripts/Datasheets";
+        private const string DatasheetsEditorModelsPath = "Assets/Scripts/Editor/Datasheets";
 
         private const string ModelFileName = "DSModel";
         private const string RecordFileName = "DSRecord";
@@ -22,6 +23,8 @@ namespace MyUtilities.DataSheets
                 return;
 
             CreateDSModelFolder(modelName);
+
+            CreateEditorDSModelFolder(modelName);
 
             GenerateClasses(modelName);
 
@@ -50,11 +53,22 @@ namespace MyUtilities.DataSheets
             AssetDatabase.CreateFolder(DatasheetsModelsPath, modelName);
         }
 
+        private static void CreateEditorDSModelFolder(string modelName)
+        {
+            if (AssetDatabase.IsValidFolder(DatasheetsEditorModelsPath + "/Example"))
+            {
+                Debug.LogWarning("Folder exists");
+                return;
+            }
+
+            AssetDatabase.CreateFolder(DatasheetsEditorModelsPath, modelName);
+        }
+
         private static void GenerateModelClass(string modelName)
         {
             string modelFilePath = GetFilePath(modelName, ModelFileName);
 
-            //Debug.Log("Creating Classfile: " + modelFilePath);
+            Debug.Log("Creating Classfile: " + modelFilePath);
 
             if (File.Exists(modelFilePath))
             {
@@ -88,7 +102,7 @@ namespace MyUtilities.DataSheets
         {
             string recordFilePath = GetFilePath(modelName, RecordFileName);
 
-            //Debug.Log("Creating Classfile: " + recordFilePath);
+            Debug.Log("Creating Classfile: " + recordFilePath);
 
             if (File.Exists(recordFilePath))
             {
@@ -118,7 +132,7 @@ namespace MyUtilities.DataSheets
         {
             string idFilePath = GetFilePath(modelName, IDFileName);
 
-            //Debug.Log("Creating Classfile: " + idFilePath);
+            Debug.Log("Creating Classfile: " + idFilePath);
 
             if (File.Exists(idFilePath))
             {
@@ -151,9 +165,9 @@ namespace MyUtilities.DataSheets
 
         private static void GenerateEditorMenuClass(string modelName)
         {
-            string idFilePath = GetFilePath(modelName, EditorMenuFileName);
+            string idFilePath = GetEditorFilePath(modelName, EditorMenuFileName);
 
-            //Debug.Log("Creating Classfile: " + idFilePath);
+            Debug.Log("Creating Classfile: " + idFilePath);
 
             if (File.Exists(idFilePath))
             {
@@ -218,7 +232,12 @@ namespace MyUtilities.DataSheets
 
         private static string GetFilePath(string modelName, string fileName)
         {
-            return $"Assets/Scripts/Datasheets/{modelName}/{modelName}{fileName}.cs";
+            return DatasheetsModelsPath + $"/{modelName}/{modelName}{fileName}.cs";
+        }
+
+        private static string GetEditorFilePath(string modelName, string fileName)
+        {
+            return DatasheetsEditorModelsPath + $"/{modelName}/{modelName}{fileName}.cs";
         }
 
         private static bool CheckCSVFile(string modelName)
