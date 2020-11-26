@@ -1,3 +1,15 @@
-﻿{
-	"name": "com.artem.myutilities.datasheets.editor"
+{
+    "name": "com.artem.myutilities.datasheets.editor",
+    "references": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
