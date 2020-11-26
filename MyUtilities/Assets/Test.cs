@@ -1,9 +1,14 @@
-﻿using System;
+﻿using MyUtilities;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Test : MonoBehaviour
 {
+    [SerializeField] private bool s = default;
+    [ShowIf(nameof(s), true, ComparisonType.Equals)]
+    [SerializeField] private bool a = default;
+
     private DataClass data;
     private void Awake()
     {
