@@ -1,0 +1,15 @@
+{
+    "name": "com.artem.myutilities.datasheets",
+    "references": [
+        "GUID:f550c93660ecf124cb4e4dd91ddf237d"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

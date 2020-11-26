@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace MyUtilities.DataSheets
 {
-    class CSVReader
+    public class CSVReader
     {
         public static List<string> GetEnumLines(string csvFilePath)
         {
