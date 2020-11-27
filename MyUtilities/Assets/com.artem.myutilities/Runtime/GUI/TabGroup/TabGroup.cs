@@ -5,6 +5,9 @@ namespace MyUtilities.GUI
 {
     public abstract class TabGroup : MonoBehaviour
     {
+        [SerializeField] protected bool initializeOnAwake = true;
+        
+        [Space(5f)]
         [SerializeField] protected TabGroupType type = default;
 
         [ShowIf(nameof(type), nameof(TabGroupType.ColorBased), ComparisonType.Equals)]
@@ -40,10 +43,11 @@ namespace MyUtilities.GUI
 
             ResetPages();
 
-            Initialize();
+            if (initializeOnAwake)
+                Initialize();
         }
 
-        protected virtual void Initialize()
+        public virtual void Initialize()
         {
             //Initialize Buttons List
             tabButtons = new List<TabButton>(tabButtons);
