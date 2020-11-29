@@ -10,15 +10,16 @@ namespace MyUtilities.GUI
     {
         public Action onTabSelected;
 
-        [SerializeField] private Image backgroundImage = default;
-
-        public Image BackgroundImage { get { return backgroundImage; } }
+        public Image BackgroundImage { get; private set; }
 
         private TabGroup tabGroup = default;
 
         public void SetTabGroup(TabGroup tabGroup)
         {
             this.tabGroup = tabGroup;
+
+            if (BackgroundImage == null)
+                BackgroundImage = GetComponent<Image>();
         }
 
         public void OnPointerEnter(PointerEventData eventData)
@@ -59,6 +60,9 @@ namespace MyUtilities.GUI
 
         public void UpdateVisual(Color color, float alphaValue = 1)
         {
+            if (BackgroundImage == null)
+                return;
+
             var newColor = new Color(color.r, color.g, color.b, alphaValue);
 
             BackgroundImage.color = newColor;
@@ -66,6 +70,9 @@ namespace MyUtilities.GUI
 
         public void UpdateVisual(Sprite sprite)
         {
+            if (BackgroundImage == null)
+                return;
+
             BackgroundImage.sprite = sprite;
         }
     }
