@@ -1,0 +1,5 @@
+{
+	"displayName": "TabGroup sample",
+	"discription": "This example shows how to implement TabGroup and TabButton components.",
+	"createSeparatePackage": false
+}
