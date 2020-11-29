@@ -14,5 +14,12 @@
   "author": {
     "name": "Artem Stolyga",
     "email": "artem.stolyga@gmail.com"
-  }
+  },
+  "samples": [
+        {
+            "displayName": "TabGroupExample",
+            "description": "This example shows how to implement TabGroup and TabButton components.",
+            "path": "Samples/Example"
+        }
+  ]
 }
