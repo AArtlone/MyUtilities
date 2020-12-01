@@ -189,14 +189,10 @@ namespace MyUtilities.DataSheets
 
                 outFile.WriteLine("");
 
-                outFile.WriteLine($"\tprivate static {modelName}DSModel model;");
-                
-                outFile.WriteLine("");
-
                 outFile.WriteLine($"\t[MenuItem(\"Window/{modelName}DSModel/GenerateModel\")]");
                 outFile.WriteLine("\tpublic static void GenerateModel()");
                 outFile.WriteLine("\t{");
-                outFile.WriteLine("\t\tstring path = \"Assets/ScriptableObjects/\" + ModelPath;");
+                outFile.WriteLine("\t\tstring path = \"Assets/Resources/\" + ModelPath;");
                 outFile.WriteLine("\t\tbool exists = File.Exists(path);");
                 outFile.WriteLine("");
                 outFile.WriteLine("\t\tif (exists)");
@@ -205,7 +201,7 @@ namespace MyUtilities.DataSheets
                 outFile.WriteLine("\t\t\treturn;");
                 outFile.WriteLine("\t\t}");
                 outFile.WriteLine("");
-                outFile.WriteLine($"\t\tmodel = CreateInstance<{modelName}DSModel>();");
+                outFile.WriteLine($"\t\t{modelName}DSModel model = CreateInstance<{modelName}DSModel>();");
                 outFile.WriteLine("");
                 outFile.WriteLine($"\t\tAssetDatabase.CreateAsset(model, path);");
                 outFile.WriteLine($"\t\tAssetDatabase.SaveAssets();");
@@ -218,10 +214,17 @@ namespace MyUtilities.DataSheets
                 outFile.WriteLine($"\t[MenuItem(\"Window/{modelName}DSModel/UpdateModel\")]");
                 outFile.WriteLine("\tpublic static void UpdateModel()");
                 outFile.WriteLine("\t{");
+                outFile.WriteLine("\t\tstring path = ModelPath.Split(new char [] {'.'})[0];");
+                outFile.WriteLine("");
+                outFile.WriteLine($"\t\t{modelName}DSModel model = Resources.Load<{modelName}DSModel>(path);");
+                outFile.WriteLine("");
                 outFile.WriteLine("\t\tif (model == null)");
                 outFile.WriteLine("\t\t\treturn;");
                 outFile.WriteLine("");
                 outFile.WriteLine($"\t\tmodel.Initialize(CSVPath);");
+                outFile.WriteLine("");
+                outFile.WriteLine("\t\tEditorUtility.SetDirty(model);");
+                outFile.WriteLine("\t\tAssetDatabase.SaveAssets();");
                 outFile.WriteLine("\t}");
 
                 outFile.WriteLine("}");
