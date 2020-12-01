@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7cf21837945da046ab2ac93285b2aca, type: 3}
   m_Name: ExampleModel
   m_EditorClassIdentifier: 
-  allRecords: []
+  allRecords:
+  - recordID: 0
+  - recordID: 1
+  - recordID: 2
