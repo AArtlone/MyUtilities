@@ -43,6 +43,13 @@ namespace MyUtilities.GUI
             isShowing = false;
         }
 
+        public void SetEmptyDataSet()
+        {
+            dataSet = new List<T2>();
+
+            Refresh();
+        }
+
         public void SetDataSet(List<T2> dataSet)
         {
             this.dataSet = dataSet;
