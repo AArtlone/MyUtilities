@@ -83,8 +83,6 @@ namespace MyUtilities.DataSheets
 
                 outFile.WriteLine("");
 
-                outFile.WriteLine("[CreateAssetMenu(fileName=\"Model\", menuName=\"Datasheets/Model\")]");
-
                 outFile.WriteLine($"public class {modelName}DSModel: DSModelBase<{modelName}DSRecord, {modelName}DSID>");
                 outFile.WriteLine("{");
                 outFile.WriteLine($"\tprotected override {modelName}DSRecord CreateRecord(string[] csvFileLine)");
