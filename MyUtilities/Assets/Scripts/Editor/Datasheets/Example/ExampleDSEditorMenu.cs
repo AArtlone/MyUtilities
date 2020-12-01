@@ -40,5 +40,6 @@ public class ExampleDSEditorMenu : EditorWindow
 		model.Initialize(CSVPath);
 
 		EditorUtility.SetDirty(model);
-		AssetDatabase.SaveAssets();}
+		AssetDatabase.SaveAssets();
+	}
 }
