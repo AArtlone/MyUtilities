@@ -7,10 +7,9 @@ using UnityEngine.UI;
 public class Tooltip : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI title = default;
+    [SerializeField] private TextMeshProUGUI content = default;
 
     [SerializeField] private LayoutElement layoutElement = default;
-
-    [SerializeField] private TextMeshProUGUI contentPrefab = default;
 
     [SerializeField] private int characterWrapLimit = default;
 
@@ -56,9 +55,12 @@ public class Tooltip : MonoBehaviour
 
     public void SetContent(List<string> contentElements)
     {
+        content.gameObject.SetActive(false);
+
         for (int i = 0; i < contentElements.Count; i++)
         {
-            var obj = Instantiate(contentPrefab, transform);
+            var obj = Instantiate(content, transform);
+            obj.gameObject.SetActive(true);
             obj.text = contentElements[i];
 
             int contentLength = contentElements[i].Length;
