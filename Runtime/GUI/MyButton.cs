@@ -106,11 +106,17 @@ namespace MyUtilities.GUI
 
         private void UpdateVisual(Sprite sprite)
         {
+            if (!otherBackgroundImage && background == null)
+                background = GetComponent<Image>();
+
             background.sprite = sprite;
         }
 
         private void UpdateVisual(Color colorToUpdate)
         {
+            if (!otherBackgroundImage && background == null)
+                background = GetComponent<Image>();
+
             Color color = new Color(colorToUpdate.r, colorToUpdate.g, colorToUpdate.b, 1f);
 
             background.color = color;
