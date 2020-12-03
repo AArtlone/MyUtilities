@@ -13,8 +13,13 @@ namespace MyUtilities.GUI
 
         [SerializeField] private UpdateMethod updateMethod = default;
 
+        [SerializeField] private bool otherBackgroundImage = default;
+        [ShowIf(nameof(otherBackgroundImage), true, ComparisonType.Equals)]
         [SerializeField] private Image backgroundImage = default;
+
+        [Space(5f)]
         [SerializeField] private TextMeshProUGUI buttonText = default;
+
         [Space(5f)]
         [ShowIf(nameof(updateMethod), nameof(UpdateMethod.Sprite), ComparisonType.Equals)]
         [SerializeField] private Sprite idleSprite = default;
@@ -35,9 +40,16 @@ namespace MyUtilities.GUI
 
         public bool Interactable { get; private set; } = true;
 
+        private Image background;
+
         private void Awake()
         {
-            if (backgroundImage == null)
+            if (!otherBackgroundImage)
+                background = GetComponent<Image>();
+            else
+                background = backgroundImage;
+
+            if (background == null)
             {
                 Debug.LogWarning($"BackgroundImage is not set in the editor on { gameObject.name }");
                 enabled = false;
@@ -94,14 +106,14 @@ namespace MyUtilities.GUI
 
         private void UpdateVisual(Sprite sprite)
         {
-            backgroundImage.sprite = sprite;
+            background.sprite = sprite;
         }
 
         private void UpdateVisual(Color colorToUpdate)
         {
             Color color = new Color(colorToUpdate.r, colorToUpdate.g, colorToUpdate.b, 1f);
 
-            backgroundImage.color = color;
+            background.color = color;
         }
 
         public void SetInteractable(bool value)
