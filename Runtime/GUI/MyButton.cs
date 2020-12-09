@@ -65,7 +65,6 @@ namespace MyUtilities.GUI
 
         public virtual void OnPointerEnter(PointerEventData eventData)
         {
-            print(Interactable);
             if (!Interactable)
                 return;
 
