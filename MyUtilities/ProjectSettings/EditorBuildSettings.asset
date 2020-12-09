@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/TooltipExample.unity
+    guid: a198c8d353316724cadb61d0c35cd317
+  - enabled: 1
+    path: Assets/TestSingletong.unity
+    guid: e7141ed1d93ef27418ed4ac769f91043
   m_configObjects: {}
