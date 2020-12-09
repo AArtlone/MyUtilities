@@ -59,21 +59,17 @@ namespace MyUtilities.GUI
             if (!Interactable)
                 return;
 
-            if (updateMethod == UpdateMethod.Color)
-                UpdateVisual(idleColor);
-            else
-                UpdateVisual(idleSprite);
+
+            UpdateVisualMain(ButtonState.Idle);
         }
 
         public virtual void OnPointerEnter(PointerEventData eventData)
         {
+            print(Interactable);
             if (!Interactable)
                 return;
 
-            if (updateMethod == UpdateMethod.Color)
-                UpdateVisual(hoverColor);
-            else
-                UpdateVisual(hoverSprite);
+            UpdateVisualMain(ButtonState.Hover);
         }
 
         public virtual void OnPointerClick(PointerEventData eventData)
@@ -81,10 +77,7 @@ namespace MyUtilities.GUI
             if (!Interactable)
                 return;
 
-            if (updateMethod == UpdateMethod.Color)
-                UpdateVisual(activeColor);
-            else
-                UpdateVisual(activeSprite);
+            UpdateVisualMain(ButtonState.Active);
 
             if (onClickEvent != null)
                 onClickEvent.Invoke();
@@ -98,27 +91,88 @@ namespace MyUtilities.GUI
             if (!Interactable)
                 return;
 
+            UpdateVisualMain(ButtonState.Idle);
+        }
+
+        private void UpdateVisualMain(ButtonState buttonState)
+        {
+            if (!otherBackgroundImage && background == null)
+                background = GetComponent<Image>();
+
             if (updateMethod == UpdateMethod.Color)
-                UpdateVisual(idleColor);
+                UpdateBackgroundColor(buttonState);
             else
-                UpdateVisual(idleSprite);
+                UpdateBackgroundSprite(buttonState);
+
+            UpdateButtonTextVisual();
         }
 
-        private void UpdateVisual(Sprite sprite)
+        private void UpdateBackgroundSprite(ButtonState buttonState)
         {
-            if (!otherBackgroundImage && background == null)
-                background = GetComponent<Image>();
+            switch (buttonState)
+            {
+                case ButtonState.Idle:
+                    background.sprite = idleSprite;
+                    break;
 
-            background.sprite = sprite;
+                case ButtonState.Hover:
+                    background.sprite = hoverSprite;
+                    break;
+
+                case ButtonState.Active:
+                    background.sprite = activeSprite;
+                    break;
+            }
         }
 
-        private void UpdateVisual(Color colorToUpdate)
+        private void UpdateBackgroundColor(ButtonState buttonState)
         {
-            if (!otherBackgroundImage && background == null)
-                background = GetComponent<Image>();
+            Color color;
+            switch (buttonState)
+            {
+                case ButtonState.Idle:
+                    color = new Color(idleColor.r, idleColor.g, idleColor.b, 1f);
+                    break;
 
-            Color color = new Color(colorToUpdate.r, colorToUpdate.g, colorToUpdate.b, 1f);
+                case ButtonState.Hover:
+                    color = new Color(hoverColor.r, hoverColor.g, hoverColor.b, 1f);
+                    break;
 
+                case ButtonState.Active:
+                    color = new Color(activeColor.r, activeColor.g, activeColor.b, 1f);
+                    break;
+
+                default:
+                    color = new Color(idleColor.r, idleColor.g, idleColor.b, 1f);
+                    break;
+            }
+
+            background.color = color;
+        }
+
+        private void UpdateButtonTextVisual()
+        {
+            if (buttonText == null)
+                return;
+
+            var textColor = buttonText.color;
+            Color newColor;
+
+            if (Interactable)
+                newColor = new Color(textColor.r, textColor.g, textColor.b, 1f);
+            else
+                newColor = new Color(textColor.r, textColor.g, textColor.b, .5f);
+
+            buttonText.color = newColor;
+        }
+
+        private void DimButton()
+        {
+            if (background == null)
+                return;
+
+            var colorToUpdate = background.color;
+            Color color = new Color(colorToUpdate.r, colorToUpdate.g, colorToUpdate.b, .5f);
             background.color = color;
         }
 
@@ -128,10 +182,12 @@ namespace MyUtilities.GUI
 
             if (Interactable)
             {
-                if (updateMethod == UpdateMethod.Color)
-                    UpdateVisual(idleColor);
-                else
-                    UpdateVisual(idleSprite);
+                UpdateVisualMain(ButtonState.Idle);
+            }
+            else
+            {
+                DimButton();
+                UpdateButtonTextVisual();
             }
         }
 
@@ -149,8 +205,11 @@ namespace MyUtilities.GUI
 
     public enum UpdateMethod
     {
-        Sprite,
-        Color
+        Sprite, Color
     }
 
+    public enum ButtonState
+    {
+        Idle, Hover, Active
+    }
 }
