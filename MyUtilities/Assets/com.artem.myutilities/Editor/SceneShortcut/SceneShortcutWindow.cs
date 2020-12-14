@@ -10,6 +10,8 @@ namespace MyUtilities.GUI
         
         private string assetFileName;
 
+        private static bool assetExists;
+
         [MenuItem("Window/SceneShortcut")]
         public static void ShowWindow()
         {
@@ -23,29 +25,36 @@ namespace MyUtilities.GUI
 
         private void OnGUI()
         {
-            GUILayout.Label("Please enter Shortcuts asset file name. It must be put into Resources/Editor", EditorStyles.textArea);
+            assetExists = asset != null;
 
-            GUILayout.Space(5f);
-
-            assetFileName = EditorGUILayout.TextField("File Name", assetFileName);
-
-            if (GUILayout.Button("Load Asset"))
-                LoadShortcutsAsset(assetFileName);
-
-            if (asset == null)
+            if (!assetExists)
             {
-                GUILayout.Label("SceneShortcuts asset is null", EditorStyles.boldLabel);
-                return;
-            }
+                GUILayout.Label("Please enter Shortcuts asset file name. It must be put into Resources/Editor", EditorStyles.textArea);
 
-            if (asset.sceneShortcuts == null || asset.sceneShortcuts.Count == 0)
+                GUILayout.Space(5f);
+
+                assetFileName = EditorGUILayout.TextField("File Name", assetFileName);
+
+                if (GUILayout.Button("Load Asset"))
+                    LoadShortcutsAsset(assetFileName);
+
+                if (asset == null)
+                {
+                    GUILayout.Label("SceneShortcuts asset is null", EditorStyles.boldLabel);
+                    return;
+                }
+            }
+            else
             {
-                GUILayout.Space(15f);
-                GUILayout.Label("No shortcuts", EditorStyles.boldLabel);
-                return;
-            }
+                if (asset.sceneShortcuts == null || asset.sceneShortcuts.Count == 0)
+                {
+                    GUILayout.Label("No shortcuts", EditorStyles.boldLabel);
+                    GUILayout.Space(10f);
+                    return;
+                }
 
-            DisplayShortcutsButtons();
+                DisplayShortcutsButtons();
+            }
         }
 
         private void DisplayShortcutsButtons()
