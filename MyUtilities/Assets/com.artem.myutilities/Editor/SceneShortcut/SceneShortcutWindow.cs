@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
@@ -7,8 +6,6 @@ namespace MyUtilities.GUI
 {
     public class SceneShortcutWindow : EditorWindow
     {
-        [SerializeField] private List<SceneAsset> sceneAssets = default;
-
         private static SceneShortcutsAsset asset;
         
         private string assetFileName;
