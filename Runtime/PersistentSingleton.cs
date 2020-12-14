@@ -10,11 +10,17 @@ namespace MyUtilities
 
         protected abstract void Awake();
 
+        /// <summary>
+        /// Indicates wether the Singleton will be destroyed because its a duplicate
+        /// </summary>
+        public bool WillBeDestroyed { get; private set; } 
+
         protected void SetInstance(T instance)
         {
             if (Instance !=  null)
             {
                 Destroy(this);
+                WillBeDestroyed = true;
                 return;
             }
 
