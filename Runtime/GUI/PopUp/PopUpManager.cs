@@ -10,29 +10,47 @@ namespace MyUtilities.GUI
         private static List<PopUpQueueElement> queueElements;
         private static PopUp popOnScreen;
 
-        public static void CreateSingleButtonTitleTextPopUp(string title, string text, string buttonText, Action callback, PopUpPriority priority = PopUpPriority.Regular)
+        public static void CreateSingleButtonTitleTextPopUp(string title, string text, string buttonText, Action callback = default(Action), PopUpPriority priority = PopUpPriority.Regular)
         {
+            if (callback == null)
+                callback = new Action(() => { });
+
             var popUp = new PopUpQueueElement(title, text, buttonText, callback, priority);
 
             CreatePopUp(popUp);
         }
 
-        public static void CreateSingleButtonTextPopUp(string text, string buttonText, Action callback, PopUpPriority priority = PopUpPriority.Regular)
+        public static void CreateSingleButtonTextPopUp(string text, string buttonText, Action callback = default(Action), PopUpPriority priority = PopUpPriority.Regular)
         {
+            if (callback == null)
+                callback = new Action(() => { } );
+
             var popUp = new PopUpQueueElement(text, buttonText, callback, priority);
 
             CreatePopUp(popUp);
         }
 
-        public static void CreateDoubleButtonTitleTextPopUp(string title, string text, string firstButtonText, Action firstButtonCallback, string secondButtonText, Action secondButtonCallback, PopUpPriority priority = PopUpPriority.Regular)
+        public static void CreateDoubleButtonTitleTextPopUp(string title, string text, string firstButtonText, string secondButtonText, Action firstButtonCallback = default(Action), Action secondButtonCallback = default(Action), PopUpPriority priority = PopUpPriority.Regular)
         {
+            if (firstButtonCallback == null)
+                firstButtonCallback = new Action(() => { });
+
+            if (secondButtonCallback == null)
+                secondButtonCallback = new Action(() => { });
+
             var popUp = new PopUpQueueElement(title, text, firstButtonText, firstButtonCallback, secondButtonText, secondButtonCallback, priority);
 
             CreatePopUp(popUp);
         }
 
-        public static void CreateDoubleButtonTextPopUp(string text, string firstButtonText, Action firstButtonCallback, string secondButtonText, Action secondButtonCallback, PopUpPriority priority = PopUpPriority.Regular)
+        public static void CreateDoubleButtonTextPopUp(string text, string firstButtonText, string secondButtonText, Action firstButtonCallback = default(Action), Action secondButtonCallback = default(Action), PopUpPriority priority = PopUpPriority.Regular)
         {
+            if (firstButtonCallback == null)
+                firstButtonCallback = new Action(() => { });
+
+            if (secondButtonCallback == null)
+                secondButtonCallback = new Action(() => { });
+
             var popUp = new PopUpQueueElement(text, firstButtonText, firstButtonCallback, secondButtonText, secondButtonCallback, priority);
 
             CreatePopUp(popUp);
