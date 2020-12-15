@@ -1,65 +1,70 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 namespace MyUtilities.GUI
 {
     public static class PopUpManager
     {
+        private static List<PopUpQueueElement> queueElements;
         private static PopUp popOnScreen;
 
-        public static void CreateSingleButtonTitleTextPopUp(string title, string text, string buttonText, Action callback)
+        public static void CreateSingleButtonTitleTextPopUp(string title, string text, string buttonText, Action callback, PopUpPriority priority = PopUpPriority.Regular)
         {
-            CreatePopUp();
+            var popUp = new PopUpQueueElement(title, text, buttonText, callback, priority);
+
+            CreatePopUp(popUp);
+        }
+
+        public static void CreateSingleButtonTextPopUp(string text, string buttonText, Action callback, PopUpPriority priority = PopUpPriority.Regular)
+        {
+            var popUp = new PopUpQueueElement(text, buttonText, callback, priority);
+
+            CreatePopUp(popUp);
+        }
+
+        public static void CreateDoubleButtonTitleTextPopUp(string title, string text, string firstButtonText, Action firstButtonCallback, string secondButtonText, Action secondButtonCallback, PopUpPriority priority = PopUpPriority.Regular)
+        {
+            var popUp = new PopUpQueueElement(title, text, firstButtonText, firstButtonCallback, secondButtonText, secondButtonCallback, priority);
+
+            CreatePopUp(popUp);
+        }
+
+        public static void CreateDoubleButtonTextPopUp(string text, string firstButtonText, Action firstButtonCallback, string secondButtonText, Action secondButtonCallback, PopUpPriority priority = PopUpPriority.Regular)
+        {
+            var popUp = new PopUpQueueElement(text, firstButtonText, firstButtonCallback, secondButtonText, secondButtonCallback, priority);
+
+            CreatePopUp(popUp);
+        }
+
+        private static void CreatePopUp(PopUpQueueElement popUp)
+        {
+            if (popOnScreen != null)
+            {
+                AddPopUpToQueue(popUp);
+                return;
+            }
+
+            InstantiatePopUpObject();
 
             if (popOnScreen == null)
                 return;
 
-            popOnScreen.AddTitle(title);
-
-            popOnScreen.AddDescription(text);
-
-            popOnScreen.AddOneButton(buttonText, callback);
+            popOnScreen.ReceiveData(popUp);
         }
 
-        public static void CreateSingleButtonTextPopUp(string text, string buttonText, Action callback)
+        private static void AddPopUpToQueue(PopUpQueueElement popUpQueueElement)
         {
-            CreatePopUp();
+            if (queueElements == null)
+                queueElements = new List<PopUpQueueElement>();
 
-            if (popOnScreen == null)
-                return;
+            queueElements.Add(popUpQueueElement);
 
-            popOnScreen.AddDescription(text);
-
-            popOnScreen.AddOneButton(buttonText, callback);
+            queueElements = queueElements.OrderBy(e => e.priority).ToList();
         }
 
-        public static void CreateDoubleButtonTitleTextPopUp(string title, string text, string firstButtonText, Action firstButtonCallback, string secondButtonText, Action secondButtonCallback)
-        {
-            CreatePopUp();
-
-            if (popOnScreen == null)
-                return;
-
-            popOnScreen.AddTitle(title);
-
-            popOnScreen.AddDescription(text);
-
-            popOnScreen.AddTwoButtons(firstButtonText, firstButtonCallback, secondButtonText, secondButtonCallback);
-        }
-
-        public static void CreateDoubleButtonTextPopUp(string text, string firstButtonText, Action firstButtonCallback, string secondButtonText, Action secondButtonCallback)
-        {
-            CreatePopUp();
-
-            if (popOnScreen == null)
-                return;
-
-            popOnScreen.AddDescription(text);
-
-            popOnScreen.AddTwoButtons(firstButtonText, firstButtonCallback, secondButtonText, secondButtonCallback);
-        }
-
-        private static void CreatePopUp()
+        private static void InstantiatePopUpObject()
         {
             var popUpContainer = GameObject.FindGameObjectWithTag("PopUpContainer");
 
@@ -71,5 +76,33 @@ namespace MyUtilities.GUI
 
             popOnScreen = UnityEngine.Object.Instantiate(Resources.Load<PopUp>("Prefabs/PopUpPrefab"), popUpContainer.transform);
         }
+
+        public static void PopUpWasClosed()
+        {
+            ShowNextPopUp();
+        }
+
+        private static void ShowNextPopUp()
+        {
+            if (queueElements == null || queueElements.Count == 0)
+                return;
+          
+            InstantiatePopUpObject();
+
+            if (popOnScreen == null)
+                return;
+
+            var nextPopUp = queueElements[0];
+
+            popOnScreen.ReceiveData(nextPopUp);
+
+            queueElements.Remove(nextPopUp);
+        }
+    }
+
+    public enum PopUpPriority 
+    {
+        High,
+        Regular
     }
 }
