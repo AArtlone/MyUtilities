@@ -12,6 +12,11 @@ namespace MyUtilities.GUI
 
         private bool isInTransition;
 
+        public bool IsNavStackEmpty()
+        {
+            return stack.Count == 0;
+        }
+
         public void Push(ViewController newViewController)
         {
             if (isInTransition)
