@@ -45,7 +45,7 @@ namespace MyUtilities.GUI
                 onTabSelected.Invoke();
         }
 
-        public void Select(Sprite sprite)
+        public virtual void Select(Sprite sprite)
         {
             UpdateVisual(sprite);
 
@@ -53,7 +53,7 @@ namespace MyUtilities.GUI
                 onTabSelected.Invoke();
         }
 
-        public void Deselect()
+        public virtual void Deselect()
         {
 
         }
