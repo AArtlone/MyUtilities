@@ -1,6 +1,6 @@
 {
   "name": "com.artem.myutilities",
-  "version": "4.1.2",
+  "version": "4.1.3",
   "displayName": "My Utilities",
   "description": "A collection of my own utilities and tools",
   "unity": "2019.1",
@@ -30,6 +30,11 @@
             "displayName": "SelectableControllerExample",
             "description": "This example shows how to use SelectableController and SelectableCell",
             "path": "Samples/SelectableController"
+        },
+        {
+            "displayName": "TooltipExample",
+            "description": "This example shows how to use Tooltip",
+            "path": "Samples/Tooltip"
         }
   ]
 }
