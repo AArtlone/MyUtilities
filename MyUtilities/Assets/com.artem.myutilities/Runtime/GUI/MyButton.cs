@@ -10,6 +10,8 @@ namespace MyUtilities.GUI
     public class MyButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IPointerExitHandler
     {
         public Action onClick;
+        public Action onPointerEnter;
+        public Action onPointerExit;
 
         [SerializeField] private UpdateMethod updateMethod = default;
 
@@ -69,6 +71,9 @@ namespace MyUtilities.GUI
                 return;
 
             UpdateVisualMain(ButtonState.Hover);
+
+            if (onPointerEnter != null)
+                onPointerEnter.Invoke();
         }
 
         public virtual void OnPointerClick(PointerEventData eventData)
@@ -91,6 +96,9 @@ namespace MyUtilities.GUI
                 return;
 
             UpdateVisualMain(ButtonState.Idle);
+
+            if (onPointerExit != null)
+                onPointerExit.Invoke();
         }
 
         private void UpdateVisualMain(ButtonState buttonState)
