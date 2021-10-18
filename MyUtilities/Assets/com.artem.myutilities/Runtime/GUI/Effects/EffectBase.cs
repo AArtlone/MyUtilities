@@ -25,16 +25,14 @@ namespace MyUtilities.GUI
 
         protected virtual void Awake()
         {
+            if (autoReset)
+                ResetEffect();
+            
             if (effectSO.tween.NeedsDelay)
             {
                 waitingForStartDelay = true;
                 delayTimeLeft = effectSO.tween.delay;
             }
-
-            if (!autoReset)
-                return;
-
-            ResetEffect();
         }
 
         private void OnDisable()
