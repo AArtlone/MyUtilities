@@ -35,6 +35,11 @@
             "displayName": "TooltipExample",
             "description": "This example shows how to use Tooltip",
             "path": "Samples/Tooltip"
+        },
+        {
+            "displayName": "EffectsExample",
+            "description": "This example shows how to use Effects",
+            "path": "Samples/Effects"
         }
   ]
 }

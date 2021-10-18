@@ -11,6 +11,13 @@ namespace MyUtilities.GUI
 
         protected override void Awake()
         {
+            if (!(effectSO is FloatEffectSO))
+            {
+                Debug.LogWarning("The reference EffectSO is of wrong type. This component requires EffectSO to be of type FloatEffectSO", this);
+                enabled = false;
+                return;
+            }
+
             canvasGroup = GetComponent<CanvasGroup>();
 
             floatEffectSO = (FloatEffectSO)effectSO;
@@ -32,6 +39,9 @@ namespace MyUtilities.GUI
 
         protected override void ResetEffect()
         {
+            if (!enabled)
+                return;
+
             base.ResetEffect();
 
             if (canvasGroup == null)
