@@ -11,6 +11,13 @@ namespace MyUtilities.GUI
 
         protected override void Awake()
         {
+            if (effectSO == null)
+            {
+                Debug.LogWarning("Missing reference for the EffectSO", this);
+                enabled = false;
+                return;
+            }
+
             if (!(effectSO is FloatEffectSO))
             {
                 Debug.LogWarning("The reference EffectSO is of wrong type. This component requires EffectSO to be of type FloatEffectSO", this);

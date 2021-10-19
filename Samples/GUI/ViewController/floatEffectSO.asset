@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fe6770623e50d74daeeb4ec75d2eca5, type: 3}
-  m_Name: example_scaleEffect_pingpong
+  m_Script: {fileID: 11500000, guid: 6b1e2ab8d2aab9243b47897836a83f79, type: 3}
+  m_Name: floatEffectSO
   m_EditorClassIdentifier: 
   tween:
-    playStyle: 2
+    playStyle: 0
     curve:
       serializedVersion: 2
       m_Curve:
@@ -38,7 +38,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    targetTime: 3
-    delay: 1
-  startValue: {x: 1, y: 1, z: 1}
-  targetValue: {x: 0, y: 0, z: 0}
+    targetTime: 1
+    delay: 0
+  startValue: 0
+  targetValue: 1

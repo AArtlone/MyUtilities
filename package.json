@@ -19,27 +19,37 @@
         {
             "displayName": "TabGroupExample",
             "description": "This example shows how to implement TabGroup and TabButton components.",
-            "path": "Samples/TabGroup"
+            "path": "Samples/GUI/TabGroup"
         },
         {
             "displayName": "PopUpExample",
             "description": "This example shows how to use PopUpManager",
-            "path": "Samples/PopUp"
+            "path": "Samples/GUI/PopUp"
         },
         {
             "displayName": "SelectableControllerExample",
             "description": "This example shows how to use SelectableController and SelectableCell",
-            "path": "Samples/SelectableController"
+            "path": "Samples/GUI/SelectableController"
         },
         {
             "displayName": "TooltipExample",
             "description": "This example shows how to use Tooltip",
-            "path": "Samples/Tooltip"
+            "path": "Samples/GUI/Tooltip"
         },
         {
             "displayName": "EffectsExample",
-            "description": "This example shows how to use Effects",
-            "path": "Samples/Effects"
+            "description": "This example shows how to use GUI effects such as alpha effect, scale effect, and position effect",
+            "path": "Samples/GUI/Effects"
+        },
+        {
+            "displayName": "ViewsExample",
+            "description": "This example shows how to use ViewController and NavigationController to set up an example menu",
+            "path": "Samples/GUI/Effects"
+        },
+        {
+            "displayName": "ShowIfExample",
+            "description": "This example shows how ShowIf attribute can be used and what it does",
+            "path": "Samples/ShowIf"
         }
   ]
 }
