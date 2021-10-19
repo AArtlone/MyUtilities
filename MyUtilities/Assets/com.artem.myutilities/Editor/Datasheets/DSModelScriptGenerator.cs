@@ -192,6 +192,9 @@ namespace MyUtilities.DataSheets
                 outFile.WriteLine($"\t[MenuItem(\"Window/{modelName}DSModel/GenerateModel\")]");
                 outFile.WriteLine("\tpublic static void GenerateModel()");
                 outFile.WriteLine("\t{");
+                outFile.WriteLine("\t\tif (!AssetDatabase.IsValidFolder(\"Assets/Resources/DSModels\"))");
+                outFile.WriteLine("\t\t\tAssetDatabase.CreateFolder(\"Assets/Resources\", \"DSModels\");");
+                outFile.WriteLine("");
                 outFile.WriteLine("\t\tstring path = \"Assets/Resources/\" + ModelPath;");
                 outFile.WriteLine("\t\tbool exists = File.Exists(path);");
                 outFile.WriteLine("");

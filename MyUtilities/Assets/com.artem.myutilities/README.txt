@@ -1,5 +1,24 @@
 This project includes a collection of utilities.
 
+You can check Samples folder for the example of how GUI utilities can be used.
+
+Datasheet utility can be also found in the Samples folder and includes a separate README file that explains what that utility does
+and provides steps for you to explore it's functionality.
+
+Another Sample that is included in this package is ShowIf. It show how a ShowIfAttribute can be used and what it does.
+
+Other utilities are explained in this README.
+
+------------------------------------------------------------
+
+SceneShortcut
+SceneShortcut is a small custom window that allows users to createe shortcuts to their scenes.
+
+In Assets/Resources/Editor right click and create a SceneShortcuts asset. Configure the asset to include desired scenes by entering
+a name and referencing a scene asset.
+
+Then access the SceneShortcut window by going to Window/SceneShortcut
+
 ------------------------------------------------------------
 
 UtilitiesClass
@@ -35,14 +54,6 @@ and a callback that you can use for your purposes.
 To load tha data you need to call IOUtility<T>.LoadData(string name, Action<T> callback.
 Where name is the name of the save data file,
 callback is the callback that returns the data class that you can use for your purposes.
-
-------------------------------------------------------------
-
-Singleton
-A Singleton class that allows for a convenient way to create a Signleton.
-Simply inherit from the Singleton<T> class,
-override the Awake method,
-and in Awake call SetInstance(this).
 
 ------------------------------------------------------------
 
