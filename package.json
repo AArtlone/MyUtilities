@@ -1,6 +1,6 @@
 {
   "name": "com.artem.myutilities",
-  "version": "4.1.3",
+  "version": "4.1.4",
   "displayName": "My Utilities",
   "description": "A collection of my own utilities and tools",
   "unity": "2019.1",
@@ -50,6 +50,11 @@
             "displayName": "ShowIfExample",
             "description": "This example shows how ShowIf attribute can be used and what it does",
             "path": "Samples/ShowIf"
+        },
+        {
+            "displayName": "DatasheetsExample",
+            "description": "This example shows how Datasheet utility can be used and for what purposes",
+            "path": "Samples/Datasheets"
         }
   ]
 }
