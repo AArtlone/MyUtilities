@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7fe6770623e50d74daeeb4ec75d2eca5, type: 3}
-  m_Name: example_positionEffect_pingpong
+  m_Name: example_scaleEffect_repeat
   m_EditorClassIdentifier: 
   tween:
-    playStyle: 2
+    playStyle: 1
     curve:
       serializedVersion: 2
       m_Curve:
@@ -39,6 +39,6 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     targetTime: 3
-    delay: 1
-  startValue: {x: 625, y: -387.5, z: 0}
-  targetValue: {x: 675, y: -387.5, z: 0}
+    delay: 0.5
+  startValue: {x: 1, y: 1, z: 1}
+  targetValue: {x: 0, y: 0, z: 0}
